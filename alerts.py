@@ -640,7 +640,7 @@ def get_record_ids_new_ms(redcap_data, days_after_epi, excluded_epi_visits):
     #x['ae_date'] = pandas.to_datetime(x['ae_date'])
     #x['sae_awareness_date'] = pandas.to_datetime(x['sae_awareness_date'])
     x['ms_date_contact'] = pandas.to_datetime(x['ms_date_contact'])
-    x['unsch_date'] = pandas.to_datetime(x['unsch_date'])
+    x['unsch_date'] = pandas.to_datetime(x['unsch_date']) ### TO BE CHANGED POTENTIALLY
     x['mig_date'] = pandas.to_datetime(x['mig_date'])
     x['comp_date'] = pandas.to_datetime(x['comp_date'])
     x['ch_his_date'] = pandas.to_datetime(x['ch_his_date'])
