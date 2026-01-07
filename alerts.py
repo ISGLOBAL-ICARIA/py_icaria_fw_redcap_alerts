@@ -3,7 +3,6 @@ from datetime import timedelta
 import pandas as pd
 from dateutil.relativedelta import relativedelta
 import math
-import numpy as np
 import pandas
 import redcap
 import params
@@ -27,25 +26,6 @@ def days_to_birthday(dob, fu):
 
     today = datetime.today()
     return (dob + relativedelta(months=+fu) - today).days
-
-def remove_status(redcap_data,redcap_project, fu_status_event,alert='\(AV\)'):
-    """
-    This was used to remove the AV or BW old alarm. 20240603
-    """
-
-    """ THIS PROJECT ONLY DELETE THOSE WITH THE EXACT STATUS ?????? """
-
-    active_alerts = redcap_data.loc[(slice(None), fu_status_event), 'child_fu_status']
-    active_alerts = active_alerts.replace(np.nan,'')
-    good_alerts =active_alerts[~active_alerts.str.contains(alert)]
-    bad_alerts = active_alerts[active_alerts.str.contains(alert)]
-
-    bad_records = bad_alerts.index.get_level_values('record_id').difference(good_AV.index.get_level_values('record_id'))
-    print(bad_records)
-
-    to_import_dict = [{'record_id': rec_id, 'child_fu_status': ''} for rec_id in bad_records]
-    response = redcap_project.import_records(to_import_dict, overwrite='overwrite')
-    print("[OLD VA/BW] Alerts REMOVED: {}".format(response.get('count')))
 
 def get_record_ids_with_custom_status(redcap_data,redcap_project, defined_alerts, fu_status_event):
     """Get the project records ids of the participants with an custom status set up in the child_fu_status field.
@@ -109,7 +89,6 @@ w
         active_alerts = active_alerts[(active_alerts.str.startswith(alert))|(active_alerts.str.startswith('COH.'+alert))]
 
     active_alerts.index = active_alerts.index.get_level_values('record_id')
-
     return active_alerts.keys()
 
 def get_list_communities(redcap_project, choice_sep, code_sep):
@@ -131,7 +110,6 @@ def get_list_communities(redcap_project, choice_sep, code_sep):
     community_choices = community_field['select_choices_or_calculations'].community
     communities_string = community_choices.split(choice_sep)
     return {community.split(code_sep)[0]: community.split(code_sep)[1] for community in communities_string}
-
 
 
 """ TO BE VISITED ALERT """
@@ -218,7 +196,7 @@ def get_record_ids_tbv(redcap_data):
 
     HH_not_done_yet = epi1_recordid.difference(hh1_recordid)
 
-    #### NEW VERSION OF THE TBV ALERT. ANDREU BOFILL 03/02/2022
+    #### NEW VERSION OF THE TBV ALERT. ANDREU BOFILL 03/02/2023
 
     last_hh_done = redcap_data.loc[(slice(None), 'hhafter_1st_dose_o_arm_1'), :].groupby('record_id').last()
     phone_unsuccess = last_hh_done[(last_hh_done['fu_type'] == float(1)) & (

@@ -135,9 +135,4 @@ ALERT_LOGIC_FIELDS = ['record_id', 'child_dob', 'screening_date', 'community', '
 subprojects = {'HF01':['HF01.01','HF01.02'],'HF02':['HF02.01','HF02.02'],'HF08':['HF08.01','HF08.02','HF08.03'],
                'HF12':['HF12.01','HF12.02'],'HF16':['HF16.01','HF16.02','HF16.03','HF16.04']}
 
-azivac_blocked_records_dict = {16040213:'', 16040155: '', 16040321: '',
-        16040350: '', 16040360 : '', 16040373 : '', 16040404 : '',17010866 : '',
-        13010750: '', 13010774 : '', 13010854 : '',12020184 : '', 11020042 : '',
-        8040319 : '', 8040295 : '', 8040236 : '', 8040172 : ''
-}
-azivac_blocked_records = azivac_blocked_records_dict.keys()
+azivac_blocked_records = tokens.azivac_blocked_records_dict.keys()

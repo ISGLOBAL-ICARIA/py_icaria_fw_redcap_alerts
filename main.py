@@ -21,7 +21,7 @@ __version__ = "0.0.1"
 __date__ = "20210323"
 __maintainer__ = "Andreu Bofill"
 __email__ = "andreu.bofill@isglobal.org"
-__status__ = "Dev"
+__status__ = "Finished"
 
 
 if __name__ == '__main__':
@@ -86,7 +86,8 @@ if __name__ == '__main__':
             )
         """
         # Non-compliant visits
-        if params.NC_ALERT in params.TRIAL_DEFINED_ALERTS:
+                 ### DEPRECATED ###
+       if params.NC_ALERT in params.TRIAL_DEFINED_ALERTS:
             # Update REDCap data as it has may been modified by previous alerts
             fields = project.export_field_names()
             field_names = [field['export_field_name'] for field in fields]
@@ -208,6 +209,7 @@ if __name__ == '__main__':
             )
         """
     """
+                ### DEPRECATED: COHORT is finished ###
     # Alerts system @ ICARIA COHORT REDCap projects
     for project_key in params.COHORT_PROJECTS:
         project = redcap.Project(params.URL, params.COHORT_PROJECTS[project_key])
@@ -225,6 +227,7 @@ if __name__ == '__main__':
         )
 
         # End of Follow Up
+                ### DEPRECATED: COHORT is finished ###
         if params.COHORT_MRV2_ALERT in params.COHORT_DEFINED_ALERTS:
             alerts.set_end_fu_alerts(
                 redcap_project=project,
